@@ -4,6 +4,8 @@ NASA Space Apps Challenge 2026. Lake Salda (Türkiye) and Jezero Crater (Mars) s
 with numbered hotspots showing why Salda is one of Earth's closest analogs to the
 lake Perseverance is exploring.
 
+**Live demo:** https://kranimo.github.io/mars-twin-finder/ · 3D rover: https://kranimo.github.io/mars-twin-finder/rover.html
+
 ## Run it
 
 Open `index.html` in a browser. No build step, no server. On the 2D map page, tiles stream from
