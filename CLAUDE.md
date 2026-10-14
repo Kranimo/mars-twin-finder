@@ -38,6 +38,13 @@ Split-screen page: Earth map (Salda) left, Mars map (Jezero) right, synced zoom.
 Annotated hotspots on each side pointing out the matching features
 (delta, carbonate shoreline, closed basin rim).
 
+### Phase 1b — 3D rover drive — built
+`rover.html` + `js/rover.js` (three.js r149 UMD, vendored). Terrain packs
+`data/terrain-{jezero,salda}.js` come from `tools/build_terrain.py`; they hold gzipped Uint16
+heights + a JPEG data URI, because file:// blocks fetch() and taints image pixels.
+`MTF.rover.simulate(seconds)` advances physics without rAF (handy for testing; the browser
+pane throttles rAF to ~1 fps when the window isn't focused).
+
 ### Phase 2 — Similarity engine
 Score any location on Earth for "Mars-likeness" across weighted factors:
 - Aridity / rainfall

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Rover Drive 3D</title>
+  <meta name="description" content="Drive a rover across real 3D terrain of Jezero Crater on Mars and its Earth twin, Lake Salda.">
+  <link rel="stylesheet" href="css/rover.css">
+</head>
+<body>
+  <canvas id="scene" aria-label="3D terrain view"></canvas>
+
+  <header class="bar">
+    <a class="back" href="index.html">← Maps</a>
+    <div class="seg" role="radiogroup" aria-label="Site">
+      <button type="button" role="radio" data-site="mars" aria-checked="true"><b class="dot mars"></b>Jezero, Mars</button>
+      <button type="button" role="radio" data-site="earth" aria-checked="false"><b class="dot earth"></b>Salda, Earth</button>
+    </div>
+    <div class="opts">
+      <label title="Stretch heights to make relief easier to see">Relief <input id="exag" type="range" min="1" max="4" step="0.25" value="1"> <output id="exag-out">1×</output></label>
+      <label id="lake-ctl" title="Fill Jezero to the level of its ancient lake"><input id="lake" type="checkbox"> Refill ancient lake
+        <input id="lake-level" type="range" min="-2600" max="-2350" step="5" value="-2395"> <output id="lake-out"></output></label>
+      <button type="button" id="cam" class="btn">Camera: chase</button>
+      <button type="button" id="help-btn" class="btn" aria-label="Controls help">?</button>
+    </div>
+  </header>
+
+  <section class="hud" aria-live="off">
+    <div class="hud-row big"><span id="h-speed">0.0</span><small>m/s</small></div>
+    <div class="hud-row" id="h-fact"></div>
+    <dl>
+      <dt>Heading</dt><dd id="h-heading"></dd>
+      <dt>Elevation</dt><dd id="h-elev"></dd>
+      <dt>Slope</dt><dd id="h-slope"></dd>
+      <dt>Position</dt><dd id="h-pos"></dd>
+      <dt>Odometer</dt><dd id="h-odo"></dd>
+      <dt>Gravity</dt><dd id="h-grav"></dd>
+    </dl>
+  </section>
+
+  <aside class="minimap" aria-label="Minimap (click to teleport)">
+    <canvas id="minimap" width="200" height="200"></canvas>
+    <div class="mini-cap">Click map to teleport · <kbd>1</kbd>–<kbd>5</kbd> waypoints</div>
+  </aside>
+
+  <aside id="card" class="card" hidden>
+    <div class="card-head"><span id="card-num" class="num"></span><strong id="card-title"></strong></div>
+    <p id="card-here"></p>
+    <div class="twin">
+      <span class="twin-label" id="card-twin-label"></span>
+      <p id="card-twin"></p>
+      <button type="button" id="card-go" class="btn go"></button>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <div class="pad" aria-label="Touch driving controls">
+    <button type="button" data-key="left" aria-label="Turn left">◀</button>
+    <div class="pad-mid">
+      <button type="button" data-key="fwd" aria-label="Forward">▲</button>
+      <button type="button" data-key="back" aria-label="Reverse">▼</button>
+    </div>
+    <button type="button" data-key="right" aria-label="Turn right">▶</button>
+    <button type="button" data-key="boost" class="boost" aria-label="Boost">⚡</button>
+  </div>
+
+  <div id="help" class="help">
+    <div class="help-box">
+      <h2>Drive the twins</h2>
+      <p>Real elevation and orbital imagery of Jezero Crater and Lake Salda. Drive to the numbered beacons to compare matching features, then jump to the twin on the other planet.</p>
+      <ul>
+        <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows: drive</li>
+        <li><kbd>Shift</kbd>: boost</li>
+        <li>Drag: look around · Scroll: zoom out to drone view</li>
+        <li><kbd>C</kbd>: chase / mast camera · <kbd>1</kbd>–<kbd>5</kbd>: jump to waypoint · <kbd>R</kbd>: back to start</li>
+      </ul>
+      <button type="button" id="help-close" class="btn go">Start driving</button>
+    </div>
+  </div>
+
+  <div id="loading" class="loading"><div class="spinner"></div><span id="loading-text">Loading terrain…</span></div>
+
+  <footer class="credits" id="credits"></footer>
+
+  <script src="vendor/three/three.min.js"></script>
+  <script src="data/sites.js"></script>
+  <script src="js/rover.js"></script>
+</body>
+</html>

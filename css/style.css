@@ -47,6 +47,8 @@ button { font: inherit; color: inherit; }
   background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer;
 }
 .btn:hover, .seg button:hover { color: var(--text); }
+.btn.drive { background: var(--focus); color: #1b1300; border-color: transparent; font-weight: 700; text-decoration: none; }
+.btn.drive:hover { color: #1b1300; filter: brightness(1.08); }
 
 /* -------------------------------------------------------------- stage */
 .stage {
@@ -105,6 +107,7 @@ button { font: inherit; color: inherit; }
 .pop-mars .leaflet-popup-content-wrapper { border-top: 3px solid var(--mars); }
 .pop p { margin: 6px 0; }
 .pop small { color: var(--muted); font-family: ui-monospace, Consolas, monospace; }
+.pop a.pop-drive { display: block; margin-top: 8px; font-weight: 700; color: var(--focus); text-decoration: none; }
 .leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
 
 /* ------------------------------------------------------------ matches */

@@ -106,7 +106,8 @@
     });
     m.bindPopup(
       '<div class="pop"><b>' + match.id + '. ' + spot.label + (spot.approx ? ' <abbr title="approximate location">≈</abbr>' : '') +
-      '</b><p>' + spot.note + '</p><small>' + fmtLatLng(spot.latlng, side) + '</small></div>',
+      '</b><p>' + spot.note + '</p><small>' + fmtLatLng(spot.latlng, side) + '</small>' +
+      '<a class="pop-drive" href="rover.html?site=' + side + '&spot=' + match.id + '">Drive here in 3D →</a></div>',
       { autoPan: false, maxWidth: 260, className: 'pop-' + side }
     );
     m.on('click', function () { select(match.id); });
