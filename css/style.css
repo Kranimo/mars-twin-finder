@@ -1,0 +1,150 @@
+:root {
+  --bg: #0b0d12;
+  --panel: #141821;
+  --panel-2: #1b2030;
+  --line: #2a3142;
+  --text: #e7eaf0;
+  --muted: #9aa3b5;
+  --earth: #4cc3d9;
+  --earth-ink: #062a31;
+  --mars: #e0703f;
+  --mars-ink: #3a1406;
+  --focus: #ffd166;
+  --radius: 10px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 var(--font);
+}
+a { color: var(--earth); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ------------------------------------------------------------- top bar */
+.topbar {
+  display: flex; flex-wrap: wrap; gap: 12px 24px;
+  align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.brand h1 { margin: 0; font-size: 20px; letter-spacing: .02em; }
+.brand p { margin: 0; color: var(--muted); font-size: 13px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+
+.seg { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.seg button {
+  border: 0; background: transparent; padding: 6px 14px; border-radius: 999px; cursor: pointer; color: var(--muted);
+}
+.seg button[aria-checked="true"] { background: var(--panel-2); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+
+.toggle { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); cursor: pointer; }
+.btn {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer;
+}
+.btn:hover, .seg button:hover { color: var(--text); }
+
+/* -------------------------------------------------------------- stage */
+.stage {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  height: min(64vh, 720px); min-height: 380px;
+  background: var(--line);
+}
+.pane { position: relative; display: flex; flex-direction: column; background: var(--bg); min-width: 0; }
+.pane-head {
+  display: flex; gap: 10px; align-items: baseline; white-space: nowrap;
+  padding: 8px 14px; background: var(--panel); border-bottom: 1px solid var(--line);
+}
+.pane-head strong { font-size: 14px; }
+.facts { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.body-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px;
+}
+.earth .body-tag { background: var(--earth); color: var(--earth-ink); }
+.mars .body-tag { background: var(--mars); color: var(--mars-ink); }
+.map { flex: 1; min-height: 0; background: #000; }
+.readout {
+  position: absolute; left: 10px; bottom: 30px; z-index: 500; pointer-events: none;
+  font: 12px/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+  background: rgba(11, 13, 18, .75); padding: 5px 8px; border-radius: 6px;
+}
+
+/* --------------------------------------------------- leaflet overrides */
+.leaflet-container { font: 13px/1.4 var(--font); background: #000; }
+.leaflet-control-attribution { font-size: 10px; }
+.leaflet-control-scale-line { background: rgba(255,255,255,.85); }
+
+.outline { stroke-width: 2; stroke-dasharray: 6 5; }
+.outline-earth { stroke: var(--earth); }
+.outline-mars { stroke: var(--mars); }
+
+.feature-label span {
+  display: inline-block; transform: translate(-50%, -50%);
+  white-space: nowrap; font-size: 12px; font-weight: 600; color: #fff;
+  text-shadow: 0 0 3px #000, 0 0 6px #000;
+}
+
+.hotspot {
+  display: grid; place-items: center;
+  border-radius: 50%; font-weight: 700; font-size: 13px;
+  border: 2px solid #fff; box-shadow: 0 0 0 3px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.6);
+  transition: transform .15s ease;
+}
+.hotspot-earth { background: var(--earth); color: var(--earth-ink); }
+.hotspot-mars { background: var(--mars); color: var(--mars-ink); }
+.hotspot:hover, .hotspot.active { transform: scale(1.25); }
+.hotspot.active { box-shadow: 0 0 0 4px var(--focus), 0 2px 10px rgba(0,0,0,.6); }
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--text); }
+.pop-earth .leaflet-popup-content-wrapper { border-top: 3px solid var(--earth); }
+.pop-mars .leaflet-popup-content-wrapper { border-top: 3px solid var(--mars); }
+.pop p { margin: 6px 0; }
+.pop small { color: var(--muted); font-family: ui-monospace, Consolas, monospace; }
+.leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+
+/* ------------------------------------------------------------ matches */
+.matches { padding: 18px 20px 8px; }
+.matches-head { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; margin-bottom: 12px; }
+.matches h2, .credits h2 { margin: 0; font-size: 16px; }
+.matches-head p { margin: 0; color: var(--muted); font-size: 13px; }
+
+.match-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.match button {
+  display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; text-align: left;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 14px; cursor: pointer;
+}
+.match button:hover { border-color: #3c4560; }
+.match.active button { border-color: var(--focus); background: var(--panel-2); }
+.match .num {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--panel-2); border: 1px solid var(--line); font-size: 12px; font-weight: 700;
+}
+.match .title { font-weight: 700; }
+.match .pair { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 12px; }
+.match .pair .e { color: var(--earth); }
+.match .pair .m { color: var(--mars); }
+.match .arrow { color: var(--muted); }
+.match .why { color: var(--muted); font-size: 13px; }
+
+/* ------------------------------------------------------------ credits */
+.credits { padding: 18px 20px 28px; border-top: 1px solid var(--line); margin-top: 18px; }
+.credits ul { margin: 10px 0; padding-left: 18px; }
+.credits li { margin: 4px 0; font-size: 13px; }
+.credits li span { color: var(--muted); }
+.fine { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+
+/* ------------------------------------------------------------- mobile */
+@media (max-width: 760px) {
+  .topbar, .matches, .credits { padding-left: 16px; padding-right: 16px; }
+  .stage { grid-template-columns: 1fr; height: auto; }
+  .pane { height: 46vh; min-height: 300px; }
+}

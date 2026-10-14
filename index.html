@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mars Twin Finder</title>
+  <meta name="description" content="Lake Salda (Türkiye) and Jezero Crater (Mars) side by side, with the features that make Salda one of Earth's best Mars analogs.">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Mars Twin Finder</h1>
+      <p>Lake Salda, Earth ↔ Jezero Crater, Mars</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="radiogroup" aria-label="Sync mode">
+        <button type="button" role="radio" data-mode="framing" aria-checked="true">Matched framing</button>
+        <button type="button" role="radio" data-mode="scale" aria-checked="false">True scale</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="sync" checked> Sync maps</label>
+      <button type="button" id="reset" class="btn">Reset view</button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="pane earth" aria-label="Earth map: Lake Salda">
+      <div class="pane-head">
+        <span class="body-tag">Earth</span>
+        <strong id="earth-name"></strong>
+        <span class="facts" id="earth-facts"></span>
+      </div>
+      <div id="map-earth" class="map"></div>
+      <div class="readout" id="earth-readout"></div>
+    </section>
+    <section class="pane mars" aria-label="Mars map: Jezero Crater">
+      <div class="pane-head">
+        <span class="body-tag">Mars</span>
+        <strong id="mars-name"></strong>
+        <span class="facts" id="mars-facts"></span>
+      </div>
+      <div id="map-mars" class="map"></div>
+      <div class="readout" id="mars-readout"></div>
+    </section>
+  </main>
+
+  <section class="matches" aria-label="Matching features">
+    <div class="matches-head">
+      <h2>Why they match</h2>
+      <p id="scale-note"></p>
+    </div>
+    <ol id="match-list" class="match-list"></ol>
+  </section>
+
+  <footer class="credits">
+    <h2>Data &amp; sources</h2>
+    <ul id="source-list"></ul>
+    <p class="fine">Markers labelled ≈ were placed by eye on imagery and are approximate. Mars coordinates are planetocentric, degrees East. Built for NASA Space Apps Challenge 2026.</p>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="data/sites.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
